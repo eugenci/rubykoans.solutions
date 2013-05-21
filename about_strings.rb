@@ -87,8 +87,8 @@ EOS
     hi = "Hello, "
     there = "World"
     hi << there
-    assert_equal 'Hello, World', hi
-    assert_equal 'World', there
+    assert_equal _, hi
+    assert_equal _, there
   end
 
   def test_the_shovel_operator_modifies_the_original_string
@@ -96,7 +96,7 @@ EOS
     hi = original_string
     there = "World"
     hi << there
-    assert_equal 'Hello, World', original_string
+    assert_equal _, original_string
 
     # THINK ABOUT IT:
     #
@@ -106,46 +106,46 @@ EOS
 
   def test_double_quoted_string_interpret_escape_characters
     string = "\n"
-    assert_equal 1, string.size
+    assert_equal _, string.size
   end
 
   def test_single_quoted_string_do_not_interpret_escape_characters
     string = '\n'
-    assert_equal 2, string.size
+    assert_equal _, string.size
   end
 
   def test_single_quotes_sometimes_interpret_escape_characters
     string = '\\\''
-    assert_equal 2, string.size
-    assert_equal "\\'", string
+    assert_equal _, string.size
+    assert_equal _, string
   end
 
   def test_double_quoted_strings_interpolate_variables
     value = 123
     string = "The value is #{value}"
-    assert_equal "The value is 123", string
+    assert_equal _, string
   end
 
   def test_single_quoted_strings_do_not_interpolate
     value = 123
     string = 'The value is #{value}'
-    assert_equal 'The value is #{value}', string
+    assert_equal _, string
   end
 
   def test_any_ruby_expression_may_be_interpolated
     string = "The square root of 5 is #{Math.sqrt(5)}"
-    assert_equal "The square root of 5 is 2.23606797749979", string
+    assert_equal _, string
   end
 
   def test_you_can_get_a_substring_from_a_string
     string = "Bacon, lettuce and tomato"
-    assert_equal 'let', string[7,3]
-    assert_equal 'let', string[7..9]
+    assert_equal _, string[7,3]
+    assert_equal _, string[7..9]
   end
 
   def test_you_can_get_a_single_character_from_a_string
     string = "Bacon, lettuce and tomato"
-    assert_equal 'a', string[1]
+    assert_equal _, string[1]
 
     # Surprised?
   end
@@ -161,21 +161,21 @@ EOS
 
   in_ruby_version("1.9") do
     def test_in_ruby_1_9_single_characters_are_represented_by_strings
-      assert_equal 'a', ?a
-      assert_equal false, ?a == 97
+      assert_equal _, ?a
+      assert_equal _, ?a == 97
     end
   end
 
   def test_strings_can_be_split
     string = "Sausage Egg Cheese"
     words = string.split
-    assert_equal ['Sausage', 'Egg', 'Cheese'], words
+    assert_equal _, words
   end
 
   def test_strings_can_be_split_with_different_patterns
     string = "the:rain:in:spain"
     words = string.split(/:/)
-    assert_equal ['the', 'rain', 'in', 'spain'], words
+    assert_equal _, words
 
     # NOTE: Patterns are formed from Regular Expressions.  Ruby has a
     # very powerful Regular Expression library.  We will become
@@ -184,14 +184,14 @@ EOS
 
   def test_strings_can_be_joined
     words = ["Now", "is", "the", "time"]
-    assert_equal 'Now is the time', words.join(" ")
+    assert_equal _, words.join(" ")
   end
 
   def test_strings_are_unique_objects
     a = "a string"
     b = "a string"
 
-    assert_equal true, a           == b
-    assert_equal false, a.object_id == b.object_id
+    assert_equal _, a           == b
+    assert_equal _, a.object_id == b.object_id
   end
 end
